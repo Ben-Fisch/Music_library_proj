@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import CharField
 
 # Create your models here.
 class Song(models.Model):
@@ -6,3 +7,4 @@ class Song(models.Model):
     artist = models.CharField(max_length=50)
     album = models.CharField(max_length=50)
     release_date = models.DateTimeField()
+    genre = models.CharField(default="r&b", max_length=50)
