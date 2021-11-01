@@ -49,3 +49,8 @@ class SongDetail(APIView):
         song = self.get_object(pk)
         song.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class SongLikes(APIView):
+
+    def update(self, request, pk):
+        number_of_likes_to_add = self.request.query_params.get('likes')
