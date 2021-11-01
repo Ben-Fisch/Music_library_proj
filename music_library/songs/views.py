@@ -52,5 +52,15 @@ class SongDetail(APIView):
 
 class SongLikes(APIView):
 
-    def update(self, request, pk):
-        number_of_likes_to_add = self.request.query_params.get('likes')
+    def get_object(self, pk):
+        try:
+            return Song.objects.get(pk=pk)
+        except Song.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        song = self.get_object(pk)
+        song.likes += 1
+        song.save()
+        serializer = SongSerializer(song)
+        return Response(serializer.data)
